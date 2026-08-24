@@ -9,10 +9,10 @@
 
 ## 📌 Overview
 
-This project demonstrates a complete networking-for-cybersecurity workflow: designing 
-and building a three-router enterprise network, implementing static routing, verifying 
-end-to-end connectivity, and analyzing live traffic (ARP, ICMP, TCP/UDP) to understand 
-how packets actually move across a network — and what that means from a security 
+This project demonstrates a complete networking-for-cybersecurity workflow: designing
+and building a three-router enterprise network, implementing static routing, verifying
+end-to-end connectivity, and analyzing live traffic (ARP, ICMP, TCP/UDP) to understand
+how packets actually move across a network — and what that means from a security
 monitoring perspective.
 
 **Theme:** Build → Configure → Test → Analyze → Secure
@@ -21,7 +21,7 @@ monitoring perspective.
 
 ## 🖧 Network Topology
 
-![Topology](01_topology.png)
+![Topology](Cyber%20Internhsip%20Assignment%203/01_topology.png)
 
 | Component | Count |
 |---|---|
@@ -49,71 +49,7 @@ monitoring perspective.
 | LAN 3 | PC3 | NIC | 192.168.30.10 | 255.255.255.0 |
 
 ---
-ip route <destination network> <subnet mask> <next-hop IP>
 
-
-Verified using `show ip interface brief` and `show ip route` on each router.
-
----
-
-## ✅ Connectivity Verification
-
-- Full mesh connectivity confirmed: PC1 ↔ PC2 ↔ PC3
-- `tracert` confirms traffic path: **PC1 → R1 → R2 → R3 → PC3**
-- Routing tables verified with static routes (`S`) present on all three routers
-
----
-
-## 🔍 Traffic Analysis
-
-Performed in Packet Tracer **Simulation Mode**, inspecting PDU details hop-by-hop.
-
-| Protocol | Key Observation |
-|---|---|
-| ARP | PC1 broadcasts ARP request to resolve its default gateway before sending ICMP traffic |
-| ICMP | TTL decrements at each router hop; source/destination MAC changes hop-by-hop while IP stays constant end-to-end |
-| TCP/UDP | Source/destination ports inspected to distinguish connection-oriented vs. connectionless behavior |
-
----
-
-## 🛠️ Troubleshooting Exercise
-
-| Stage | Detail |
-|---|---|
-| **Problem** | Static route to `192.168.30.0/24` removed from R2 |
-| **Evidence** | Ping from PC1 to PC3 failed |
-| **Diagnosis** | `show ip route` on R2 confirmed missing route |
-| **Solution** | Re-added `ip route 192.168.30.0 255.255.255.0 10.0.23.2` |
-| **Verification** | Ping from PC1 to PC3 succeeded |
-
----
-
-## 📚 Online Labs Completed
-
-| Lab | Platform | Status |
-|---|---|---|
-| Network Packet Analysis | LetsDefend | ✅ Completed |
-| Network Services | TryHackMe | ✅ Completed |
-| Network Services 2 | TryHackMe | ✅ Completed |
-| DNS in Detail | TryHackMe | ✅ Completed |
-| Network Security Essentials | TryHackMe | ✅ Completed |
-| Pickle Rick (CTF) | TryHackMe | ✅ Completed |
-
----
-
-## 📁 Repository Contents
-
-- `UmarImran_Week3_Networking_Assesment.pkt` — Cisco Packet Tracer source file
-- Screenshots — full evidence set covering topology, configuration, verification, 
-  traffic analysis, and troubleshooting
-
----
-
-## 🎯 Key Takeaway
-
-IP addressing stays consistent end-to-end while MAC addressing changes at every hop — 
-understanding this distinction is foundational to network traffic analysis and, by 
-extension, to SOC monitoring and incident detection.
 ## ⚙️ Configuration Summary
 
 Static routing was configured on all three routers so each LAN could reach the other two.
